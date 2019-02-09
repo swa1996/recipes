@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="exam.model.Recipe" table="recipe" >
+   <id name="id" column="id" type="integer">
+        <generator class="increment"/>
+    </id>
+    <property column="name" name="name" type="string"/>  
+ <set name="ingridients" table="recipe_IList"
+cascade="save-update, delete-orphan">
+<key column="recipe_id"/>
+<many-to-many class="exam.model.IngredientsList" 
+column="IList_id"/>
+        </set>
+ <list name="procedure" table="recipe_cooking"
+cascade="save-update, delete-orphan">
+<key column="recipe_id"/>
+<index column="position"></index>
+<many-to-many class="exam.model.Procedure" 
+column="cooking_id"/>
+        </list>
+  </class>
+</hibernate-mapping>
